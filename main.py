@@ -31,7 +31,8 @@ class AlgorytmyGuiApp:
         self.label5.configure(text='liczba poziomów (n)')
         self.label5.pack(side='left')
         self.rail_fence_n_input = tk.Spinbox(self.frame3)
-        self.rail_fence_n_input.configure(from_='0', increment='1', justify='center', to='9')
+        self.rail_fence_n_input.configure(from_='0', increment='1', justify='center', to='10')
+        self.rail_fence_n_input.configure(width='2')
         self.rail_fence_n_input.delete(0, 'end')
         self.rail_fence_n_input.insert(0, '3')
         self.rail_fence_n_input.pack(fill='y', padx='10', side='left')
@@ -46,11 +47,23 @@ class AlgorytmyGuiApp:
         self.label6.configure(font='{Bahnschrift SemiLight SemiConde} 16 {}', text='Przestawienie macierzowe a  ')
         self.label6.pack(side='left')
         self.label7 = tk.Label(self.frame4)
-        self.label7.configure(text='klucz kodujący')
+        self.label7.configure(text='klucz kodujący:')
         self.label7.pack(side='left')
         self.matrix_conversion1_input = tk.Entry(self.frame4)
-        self.matrix_conversion1_input.configure(justify='center')
+        self.matrix_conversion1_input.configure(justify='center', width='15')
+        self.matrix_conversion1_input.delete(0, 'end')
+        self.matrix_conversion1_input.insert(0, '3-4-1-5-2')
         self.matrix_conversion1_input.pack(fill='y', padx='10', side='left')
+        self.label12 = tk.Label(self.frame4)
+        self.label12.configure(text='d:')
+        self.label12.pack(side='left')
+        self.matrix_conversion1_input2 = tk.Spinbox(self.frame4)
+        self.matrix_conversion1_input2.configure(from_='0', increment='1', justify='center', to='10')
+        self.matrix_conversion1_input2.configure(width='2')
+        self.matrix_conversion1_input2.pack(fill='y', padx='10', side='left')
+        self.matrix_conversion1_input2.delete(0, 'end')
+        self.matrix_conversion1_input2.insert(0, '3')
+
         self.button2 = tk.Button(self.frame4)
         self.button2.configure(text='Szyfruj')
         self.button2.pack(fill='y', ipadx='10', side='left')
@@ -62,15 +75,26 @@ class AlgorytmyGuiApp:
         self.label8.configure(font='{Bahnschrift SemiLight SemiConde} 16 {}', text='Przestawienie macierzowe b  ')
         self.label8.pack(side='left')
         self.label9 = tk.Label(self.frame5)
-        self.label9.configure(text='klucz kodujący')
+        self.label9.configure(text='klucz kodujący:')
         self.label9.pack(side='left')
         self.matrix_conversion2_input = tk.Entry(self.frame5)
-        self.matrix_conversion2_input.configure(justify='center')
+        self.matrix_conversion2_input.configure(justify='center', width='15')
+        self.matrix_conversion2_input.delete(0, 'end')
+        self.matrix_conversion2_input.insert(0, '3-4-1-5-2')
         self.matrix_conversion2_input.pack(fill='y', padx='10', side='left')
-        self.button3 = tk.Button(self.frame5)
-        self.button3.configure(text='Szyfruj')
-        self.button3.pack(fill='y', ipadx='10', side='left')
-        self.button3.configure(command=self.matrix_conversion2_encrypt)
+        self.label13 = tk.Label(self.frame5)
+        self.label13.configure(text='d:')
+        self.label13.pack(side='left')
+        self.matrix_conversion2_input2 = tk.Spinbox(self.frame5)
+        self.matrix_conversion2_input2.configure(from_='0', increment='1', justify='center', to='10')
+        self.matrix_conversion2_input2.configure(width='2')
+        self.matrix_conversion2_input2.delete(0, 'end')
+        self.matrix_conversion2_input2.insert(0, '3')
+        self.matrix_conversion2_input2.pack(fill='y', padx='10', side='left')
+        self.button4 = tk.Button(self.frame5)
+        self.button4.configure(text='Szyfruj')
+        self.button4.pack(fill='y', ipadx='10', side='left')
+        self.button4.configure(command=self.matrix_conversion2_encrypt)
         self.frame5.configure(height='200', width='200')
         self.frame5.pack(anchor='w', padx='20', pady='10', side='top')
         self.frame6 = tk.Frame(self.main_window)
@@ -91,27 +115,28 @@ class AlgorytmyGuiApp:
     def run(self):
         self.mainwindow.mainloop()
 
-    def rail_fence_encrypt(self):
-        code_input = self.code_input.get()
-        rail_fence_n = self.rail_fence_n_input.get()
-
-        self.insert_code(code_input)
-
-        pass
-
-    def insert_code(self, code):
+    def insert_output_code(self, code):
         self.output_input.delete(0, 'end')
         self.output_input.insert(0, code)
 
+    def rail_fence_encrypt(self):
+        code_input = self.code_input.get()
+        rail_fence_n = self.rail_fence_n_input.get()
+        self.insert_output_code(code_input)
+
     def matrix_conversion1_encrypt(self):
-        pass
+        code_input = self.code_input.get()
+        n = self.matrix_conversion1_input2.get()
+        coding_key = self.matrix_conversion1_input.get()
+        self.insert_output_code(code_input)
 
     def matrix_conversion2_encrypt(self):
-        pass
+        code_input = self.code_input.get()
+        n = self.matrix_conversion2_input2.get()
+        coding_key = self.matrix_conversion2_input.get()
+        self.insert_output_code(code_input)
 
 
 if __name__ == '__main__':
     app = AlgorytmyGuiApp()
     app.run()
-
-
