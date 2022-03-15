@@ -44,3 +44,78 @@ def PM2(text, key_word):
         result += ' '
 
     return result
+
+
+def RF1(text, key):
+    col, dir_down, row, tab = data(key, text)
+
+    for i in range(len(text)):
+
+        if (row == 0) or (row == key - 1):
+            dir_down = not dir_down
+
+        tab[row][col] = text[i]
+        col += 1
+
+        if dir_down:
+            row += 1
+        else:
+            row -= 1
+
+    result = []
+    for i in range(key):
+        for j in range(len(text)):
+            if tab[i][j] != "\n":
+                result.append(tab[i][j])
+    return "".join(result)
+
+
+def data(key, text):
+    tab = [["\n" for _ in range(len(text))] for _ in range(key)]
+    dir_down = False
+    row, col = 0, 0
+    return col, dir_down, row, tab
+
+
+def RF2(cipher, key):
+    col, dir_down, row, tab = data(key, cipher)
+
+    for i in range(len(cipher)):
+        if row == 0:
+            dir_down = True
+        if row == key - 1:
+            dir_down = False
+
+        tab[row][col] = "-"
+        col += 1
+
+        if dir_down:
+            row += 1
+        else:
+            row -= 1
+
+    index = 0
+    for i in range(key):
+        for j in range(len(cipher)):
+            if (tab[i][j] == "-") and (index < len(cipher)):
+                tab[i][j] = cipher[index]
+                index += 1
+
+    result = []
+    row, col = 0, 0
+    for i in range(len(cipher)):
+
+        if row == 0:
+            dir_down = True
+        if row == key - 1:
+            dir_down = False
+
+        if tab[row][col] != "-":
+            result.append(tab[row][col])
+            col += 1
+
+        if dir_down:
+            row += 1
+        else:
+            row -= 1
+    return "".join(result)
