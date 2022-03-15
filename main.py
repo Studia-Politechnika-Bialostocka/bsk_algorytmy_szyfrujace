@@ -3,6 +3,8 @@ import pygubu
 import tkinter as tk
 import tkinter.ttk as ttk
 
+from algorytmy_impl import PM, PM2
+
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "algorytmy_gui.ui"
 
@@ -62,7 +64,7 @@ class AlgorytmyGuiApp:
         self.matrix_conversion1_input2.configure(width='2')
         self.matrix_conversion1_input2.pack(fill='y', padx='10', side='left')
         self.matrix_conversion1_input2.delete(0, 'end')
-        self.matrix_conversion1_input2.insert(0, '3')
+        self.matrix_conversion1_input2.insert(0, '5')
 
         self.button2 = tk.Button(self.frame4)
         self.button2.configure(text='Szyfruj')
@@ -80,7 +82,7 @@ class AlgorytmyGuiApp:
         self.matrix_conversion2_input = tk.Entry(self.frame5)
         self.matrix_conversion2_input.configure(justify='center', width='15')
         self.matrix_conversion2_input.delete(0, 'end')
-        self.matrix_conversion2_input.insert(0, '3-4-1-5-2')
+        self.matrix_conversion2_input.insert(0, 'CONVENIENCE')
         self.matrix_conversion2_input.pack(fill='y', padx='10', side='left')
         self.label13 = tk.Label(self.frame5)
         self.label13.configure(text='d:')
@@ -89,7 +91,6 @@ class AlgorytmyGuiApp:
         self.matrix_conversion2_input2.configure(from_='0', increment='1', justify='center', to='10')
         self.matrix_conversion2_input2.configure(width='2')
         self.matrix_conversion2_input2.delete(0, 'end')
-        self.matrix_conversion2_input2.insert(0, '3')
         self.matrix_conversion2_input2.pack(fill='y', padx='10', side='left')
         self.button4 = tk.Button(self.frame5)
         self.button4.configure(text='Szyfruj')
@@ -128,13 +129,13 @@ class AlgorytmyGuiApp:
         code_input = self.code_input.get()
         n = self.matrix_conversion1_input2.get()
         coding_key = self.matrix_conversion1_input.get()
-        self.insert_output_code(code_input)
+        coding_key = [int(s) for s in coding_key.split('-')]
+        self.insert_output_code(PM(code_input, d=int(n), key=coding_key))
 
     def matrix_conversion2_encrypt(self):
         code_input = self.code_input.get()
-        n = self.matrix_conversion2_input2.get()
         coding_key = self.matrix_conversion2_input.get()
-        self.insert_output_code(code_input)
+        self.insert_output_code(PM2(code_input, coding_key))
 
 
 if __name__ == '__main__':
