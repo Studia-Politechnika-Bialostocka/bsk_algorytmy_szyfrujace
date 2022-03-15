@@ -26,7 +26,7 @@ class AlgorytmyGuiApp:
         self.code_input.configure(width='65')
         self.code_input.pack(anchor='center', fill='y', padx='10', side='left')
         self.__tkvar = tk.StringVar(value='Encrypt')
-        __values = ['Encrypt', 'Decrypt']
+        __values = ['Decrypt']
         self.algorithm_option = tk.OptionMenu(self.frame7, self.__tkvar, 'Encrypt', *__values, command=None)
         self.algorithm_option.pack(fill='y', side='top')
         self.frame7.configure(height='200', width='200')
