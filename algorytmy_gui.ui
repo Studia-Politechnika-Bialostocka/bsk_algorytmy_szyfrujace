@@ -7,14 +7,14 @@
     <child>
       <object class="tk.Label" id="header_label">
         <property name="font">{Bahnschrift SemiLight SemiConde} 36 {bold}</property>
-        <property name="text" translatable="yes">Algorytmy blokowe</property>
+        <property name="text" translatable="yes">Block algorithms</property>
         <layout manager="pack">
           <property name="side">top</property>
         </layout>
       </object>
     </child>
     <child>
-      <object class="ttk.Frame" id="frame1">
+      <object class="tk.Frame" id="frame7">
         <property name="height">200</property>
         <property name="width">200</property>
         <layout manager="pack">
@@ -24,9 +24,9 @@
           <property name="side">top</property>
         </layout>
         <child>
-          <object class="tk.Label" id="code_input_label">
+          <object class="tk.Label" id="label1">
             <property name="font">{Bahnschrift SemiLight SemiConde} 16 {}</property>
-            <property name="text" translatable="yes">Input Code  </property>
+            <property name="text" translatable="yes">Input Code</property>
             <layout manager="pack">
               <property name="side">left</property>
             </layout>
@@ -34,18 +34,29 @@
         </child>
         <child>
           <object class="ttk.Entry" id="code_input">
-            <property name="width">80</property>
+            <property name="width">65</property>
             <layout manager="pack">
               <property name="anchor">center</property>
               <property name="fill">y</property>
-              <property name="side">right</property>
+              <property name="padx">10</property>
+              <property name="side">left</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.OptionMenu" id="algorithm_option">
+            <property name="value">Encrypt</property>
+            <property name="values">Encrypt,Decrypt</property>
+            <layout manager="pack">
+              <property name="fill">y</property>
+              <property name="side">top</property>
             </layout>
           </object>
         </child>
       </object>
     </child>
     <child>
-      <object class="tk.Frame" id="frame3">
+      <object class="tk.Frame" id="frame8">
         <property name="height">200</property>
         <property name="width">200</property>
         <layout manager="pack">
@@ -55,7 +66,7 @@
           <property name="side">top</property>
         </layout>
         <child>
-          <object class="tk.Label" id="label4">
+          <object class="tk.Label" id="label2">
             <property name="font">{Bahnschrift SemiLight SemiConde} 16 {}</property>
             <property name="text" translatable="yes">Rail fence   </property>
             <layout manager="pack">
@@ -64,8 +75,8 @@
           </object>
         </child>
         <child>
-          <object class="tk.Label" id="label5">
-            <property name="text" translatable="yes">liczba poziomów (n)</property>
+          <object class="tk.Label" id="label3">
+            <property name="text" translatable="yes">number of levels (n)</property>
             <layout manager="pack">
               <property name="side">left</property>
             </layout>
@@ -86,9 +97,9 @@
           </object>
         </child>
         <child>
-          <object class="tk.Button" id="button1">
-            <property name="command" type="command" cbtype="simple">rail_fence_encrypt</property>
-            <property name="text" translatable="yes">Szyfruj</property>
+          <object class="tk.Button" id="rail_fence_run">
+            <property name="command" type="command" cbtype="simple">rail_fence_run</property>
+            <property name="text" translatable="yes">Run</property>
             <layout manager="pack">
               <property name="fill">y</property>
               <property name="ipadx">10</property>
@@ -99,7 +110,7 @@
       </object>
     </child>
     <child>
-      <object class="tk.Frame" id="frame4">
+      <object class="tk.Frame" id="frame9">
         <property name="height">200</property>
         <property name="width">200</property>
         <layout manager="pack">
@@ -109,24 +120,24 @@
           <property name="side">top</property>
         </layout>
         <child>
-          <object class="tk.Label" id="label6">
+          <object class="tk.Label" id="label15">
             <property name="font">{Bahnschrift SemiLight SemiConde} 16 {}</property>
-            <property name="text" translatable="yes">Przestawienie macierzowe a  </property>
+            <property name="text" translatable="yes">Matrix conversion a  </property>
             <layout manager="pack">
               <property name="side">left</property>
             </layout>
           </object>
         </child>
         <child>
-          <object class="tk.Label" id="label7">
-            <property name="text" translatable="yes">klucz kodujący:</property>
+          <object class="tk.Label" id="label16">
+            <property name="text" translatable="yes">coding key:</property>
             <layout manager="pack">
               <property name="side">left</property>
             </layout>
           </object>
         </child>
         <child>
-          <object class="tk.Entry" id="matrix_conversion1_input">
+          <object class="tk.Entry" id="matrix_conversion_a_key_input">
             <property name="justify">center</property>
             <property name="width">15</property>
             <layout manager="pack">
@@ -137,7 +148,7 @@
           </object>
         </child>
         <child>
-          <object class="tk.Label" id="label12">
+          <object class="tk.Label" id="label17">
             <property name="text" translatable="yes">d:</property>
             <layout manager="pack">
               <property name="side">left</property>
@@ -145,7 +156,7 @@
           </object>
         </child>
         <child>
-          <object class="tk.Spinbox" id="matrix_conversion1_input2">
+          <object class="tk.Spinbox" id="matrix_conversion_a_d_input">
             <property name="from_">0</property>
             <property name="increment">1</property>
             <property name="justify">center</property>
@@ -159,9 +170,9 @@
           </object>
         </child>
         <child>
-          <object class="tk.Button" id="button2">
-            <property name="command" type="command" cbtype="simple">matrix_conversion1_encrypt</property>
-            <property name="text" translatable="yes">Szyfruj</property>
+          <object class="tk.Button" id="button6">
+            <property name="command" type="command" cbtype="simple">matrix_conversion1_run</property>
+            <property name="text" translatable="yes">Run</property>
             <layout manager="pack">
               <property name="fill">y</property>
               <property name="ipadx">10</property>
@@ -172,7 +183,7 @@
       </object>
     </child>
     <child>
-      <object class="tk.Frame" id="frame5">
+      <object class="tk.Frame" id="frame10">
         <property name="height">200</property>
         <property name="width">200</property>
         <layout manager="pack">
@@ -182,24 +193,24 @@
           <property name="side">top</property>
         </layout>
         <child>
-          <object class="tk.Label" id="label8">
+          <object class="tk.Label" id="label21">
             <property name="font">{Bahnschrift SemiLight SemiConde} 16 {}</property>
-            <property name="text" translatable="yes">Przestawienie macierzowe b  </property>
+            <property name="text" translatable="yes">Matrix conversion b  </property>
             <layout manager="pack">
               <property name="side">left</property>
             </layout>
           </object>
         </child>
         <child>
-          <object class="tk.Label" id="label9">
-            <property name="text" translatable="yes">klucz kodujący:</property>
+          <object class="tk.Label" id="label22">
+            <property name="text" translatable="yes">coding key:</property>
             <layout manager="pack">
               <property name="side">left</property>
             </layout>
           </object>
         </child>
         <child>
-          <object class="tk.Entry" id="matrix_conversion2_input">
+          <object class="tk.Entry" id="matrix_conversion_b_key_input">
             <property name="justify">center</property>
             <property name="width">15</property>
             <layout manager="pack">
@@ -210,31 +221,9 @@
           </object>
         </child>
         <child>
-          <object class="tk.Label" id="label13">
-            <property name="text" translatable="yes">d:</property>
-            <layout manager="pack">
-              <property name="side">left</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="tk.Spinbox" id="matrix_conversion2_input2">
-            <property name="from_">0</property>
-            <property name="increment">1</property>
-            <property name="justify">center</property>
-            <property name="to">10</property>
-            <property name="width">2</property>
-            <layout manager="pack">
-              <property name="fill">y</property>
-              <property name="padx">10</property>
-              <property name="side">left</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="tk.Button" id="button4">
-            <property name="command" type="command" cbtype="simple">matrix_conversion2_encrypt</property>
-            <property name="text" translatable="yes">Szyfruj</property>
+          <object class="tk.Button" id="button8">
+            <property name="command" type="command" cbtype="simple">matrix_conversion2_run</property>
+            <property name="text" translatable="yes">Run</property>
             <layout manager="pack">
               <property name="fill">y</property>
               <property name="ipadx">10</property>
@@ -245,7 +234,7 @@
       </object>
     </child>
     <child>
-      <object class="tk.Frame" id="frame6">
+      <object class="tk.Frame" id="frame11">
         <property name="height">200</property>
         <property name="width">200</property>
         <layout manager="pack">
@@ -255,7 +244,7 @@
           <property name="side">top</property>
         </layout>
         <child>
-          <object class="tk.Label" id="label10">
+          <object class="tk.Label" id="label27">
             <property name="font">{Bahnschrift SemiLight SemiConde} 16 {}</property>
             <property name="text" translatable="yes">Output   </property>
             <layout manager="pack">
@@ -264,7 +253,7 @@
           </object>
         </child>
         <child>
-          <object class="ttk.Entry" id="output_input">
+          <object class="ttk.Entry" id="code_output">
             <property name="width">80</property>
             <layout manager="pack">
               <property name="anchor">center</property>
