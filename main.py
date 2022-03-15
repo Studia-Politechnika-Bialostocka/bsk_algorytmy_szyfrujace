@@ -1,7 +1,9 @@
+import tkinter
+from tkinter import filedialog
 import pathlib
-import pygubu
 import tkinter as tk
 import tkinter.ttk as ttk
+
 
 from algorytmy_impl import PM, PM2
 
@@ -84,14 +86,14 @@ class AlgorytmyGuiApp:
         self.matrix_conversion2_input.delete(0, 'end')
         self.matrix_conversion2_input.insert(0, 'CONVENIENCE')
         self.matrix_conversion2_input.pack(fill='y', padx='10', side='left')
-        self.label13 = tk.Label(self.frame5)
-        self.label13.configure(text='d:')
-        self.label13.pack(side='left')
-        self.matrix_conversion2_input2 = tk.Spinbox(self.frame5)
-        self.matrix_conversion2_input2.configure(from_='0', increment='1', justify='center', to='10')
-        self.matrix_conversion2_input2.configure(width='2')
-        self.matrix_conversion2_input2.delete(0, 'end')
-        self.matrix_conversion2_input2.pack(fill='y', padx='10', side='left')
+        # self.label13 = tk.Label(self.frame5)
+        # self.label13.configure(text='d:')
+        # self.label13.pack(side='left')
+        # self.matrix_conversion2_input2 = tk.Spinbox(self.frame5)
+        # self.matrix_conversion2_input2.configure(from_='0', increment='1', justify='center', to='10')
+        # self.matrix_conversion2_input2.configure(width='2')
+        # self.matrix_conversion2_input2.delete(0, 'end')
+        # self.matrix_conversion2_input2.pack(fill='y', padx='10', side='left')
         self.button4 = tk.Button(self.frame5)
         self.button4.configure(text='Szyfruj')
         self.button4.pack(fill='y', ipadx='10', side='left')
@@ -120,13 +122,28 @@ class AlgorytmyGuiApp:
         self.output_input.delete(0, 'end')
         self.output_input.insert(0, code)
 
+    def message_popup(self, title, text, type_message='info'):
+        if type_message == 'info':
+            tk.messagebox.showinfo(title, text)
+        elif type_message == 'warning':
+            tkinter.messagebox.showwarning(title, text)
+        elif type_message == 'error':
+            tk.messagebox.showerror(title, text)
+
+
     def rail_fence_encrypt(self):
         code_input = self.code_input.get()
+        if not code_input:
+            self.message_popup('Błąd', 'Nie wprowadzono kodu!', 'warning')
+            return
         rail_fence_n = self.rail_fence_n_input.get()
         self.insert_output_code(code_input)
 
     def matrix_conversion1_encrypt(self):
         code_input = self.code_input.get()
+        if not code_input:
+            self.message_popup('Błąd', 'Nie wprowadzono kodu!', 'warning')
+            return
         n = int(self.matrix_conversion1_input2.get())
         coding_key = self.matrix_conversion1_input.get()
         coding_key = [int(s) for s in coding_key.split('-')]
@@ -141,6 +158,10 @@ class AlgorytmyGuiApp:
 
     def matrix_conversion2_encrypt(self):
         code_input = self.code_input.get()
+        if not code_input:
+            self.message_popup('Błąd', 'Nie wprowadzono kodu!', 'warning')
+            return
+
         coding_key = self.matrix_conversion2_input.get()
         self.insert_output_code(PM2(code_input, coding_key))
 
