@@ -4,7 +4,7 @@ import pathlib
 import tkinter as tk
 import tkinter.ttk as ttk
 
-from algorytmy_impl import PM, PM2
+from algorytmy_impl import PM, PM2, RF1, RF2
 
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "algorytmy_gui.ui"
@@ -129,8 +129,8 @@ class AlgorytmyGuiApp:
         if not code_input:
             self.message_popup('Błąd', 'Nie wprowadzono kodu!', 'warning')
             return
-        rail_fence_n = self.rail_fence_n_input.get()
-        self.insert_output_code(code_input)
+        rail_fence_n = int(self.rail_fence_n_input.get())
+        self.insert_output_code(RF1(code_input, key=rail_fence_n))
 
     def matrix_conversion1_run(self):
         code_input = self.code_input.get()
