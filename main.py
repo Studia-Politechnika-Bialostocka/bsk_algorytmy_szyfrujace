@@ -127,10 +127,17 @@ class AlgorytmyGuiApp:
 
     def matrix_conversion1_encrypt(self):
         code_input = self.code_input.get()
-        n = self.matrix_conversion1_input2.get()
+        n = int(self.matrix_conversion1_input2.get())
         coding_key = self.matrix_conversion1_input.get()
         coding_key = [int(s) for s in coding_key.split('-')]
-        self.insert_output_code(PM(code_input, d=int(n), key=coding_key))
+        if len(coding_key) != n:
+            self.insert_output_code("Ilość kolumn w kluczu musi się równać d!")
+            return
+        for col in coding_key:
+            if col > n:
+                self.insert_output_code(f'Numer kolumny ({col}) nie może być większy od liczby kolumn ({n})!')
+                return
+        self.insert_output_code(PM(code_input, d=n, key=coding_key))
 
     def matrix_conversion2_encrypt(self):
         code_input = self.code_input.get()
