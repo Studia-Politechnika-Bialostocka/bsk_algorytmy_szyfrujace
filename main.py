@@ -4,7 +4,6 @@ import pathlib
 import tkinter as tk
 import tkinter.ttk as ttk
 
-
 from algorytmy_impl import PM, PM2
 
 PROJECT_PATH = pathlib.Path(__file__).parent
@@ -44,10 +43,10 @@ class AlgorytmyGuiApp:
         self.rail_fence_n_input.delete(0, 'end')
         self.rail_fence_n_input.insert(0, '3')
         self.rail_fence_n_input.pack(fill='y', padx='10', side='left')
-        self.rail_fence_run = tk.Button(self.frame8)
-        self.rail_fence_run.configure(text='Run')
-        self.rail_fence_run.pack(fill='y', ipadx='10', side='left')
-        self.rail_fence_run.configure(command=self.rail_fence_run)
+        self.rail_fence_run_button = tk.Button(self.frame8)
+        self.rail_fence_run_button.configure(text='Run')
+        self.rail_fence_run_button.pack(fill='y', ipadx='10', side='left')
+        self.rail_fence_run_button.configure(command=self.rail_fence_run)
         self.frame8.configure(height='200', width='200')
         self.frame8.pack(anchor='w', padx='20', pady='10', side='top')
         self.frame9 = tk.Frame(self.main_window)
@@ -124,7 +123,6 @@ class AlgorytmyGuiApp:
             tkinter.messagebox.showwarning(title, text)
         elif type_message == 'error':
             tk.messagebox.showerror(title, text)
-
 
     def rail_fence_run(self):
         code_input = self.code_input.get()
