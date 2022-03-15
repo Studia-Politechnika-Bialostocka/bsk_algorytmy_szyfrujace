@@ -143,11 +143,11 @@ class AlgorytmyGuiApp:
         coding_key = self.matrix_conversion_a_key_input.get()
         coding_key = [int(s) for s in coding_key.split('-')]
         if len(coding_key) != d:
-            self.insert_output_code("Ilość kolumn w kluczu musi się równać d!")
+            self.message_popup('Błąd', 'Ilość kolumn w kluczu musi się równać d!', 'error')
             return
         for col in coding_key:
             if col > d:
-                self.insert_output_code(f'Numer kolumny ({col}) nie może być większy od liczby kolumn ({d})!')
+                self.message_popup('Błąd', f'Liczby w kluczu nie mogą być większe od d! ({col} > {d})', 'error')
                 return
         self.insert_output_code(PM(code_input, d=d, key=coding_key))
 
