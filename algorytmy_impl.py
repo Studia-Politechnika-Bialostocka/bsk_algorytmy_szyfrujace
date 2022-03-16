@@ -21,6 +21,21 @@ def PM(text, d = 5, key = [3, 4, 1, 5, 2]):
 
     return encrypted
 
+def PM_decrypt(text, d = 5, key = [3,4,1,5,2]):
+    matrix = [['_' for i in range(d)] for j in range(math.ceil(len(text)/d))]
+
+    while len(text)%d != 0:
+        text += '_'
+
+    for i in range(math.ceil(len(text)/d)):
+        for j in range(d):
+            if i*d + j >= len(text):
+                matrix[i][key[j]-1] = '_'
+            else:
+                matrix[i][key[j]-1] = text[i*d + j]
+
+    matrix = np.array(matrix)
+    return ''.join(matrix.flatten()).replace('_', '')
 
 def PM2(text, key_word):
     d = len(key_word)
@@ -44,6 +59,22 @@ def PM2(text, key_word):
         result += ' '
 
     return result
+
+def PM2_decrypt(text, key_word):
+    d = len(key_word)
+    key = np.argsort(np.array(list(key_word)))
+
+
+    words = text.split()
+    max_col_len = max([len(x) for x in words])
+    matrix = [['_' for i in range(d)] for j in range(max_col_len)]
+
+    for i in range(len(key)):
+        for j in range(len(words[i])):
+            matrix[j][key[i]] = words[i][j]
+
+    matrix = np.array(matrix)
+    return ''.join(matrix.flatten()).replace('_', '')
 
 
 def RF1(text, key):
