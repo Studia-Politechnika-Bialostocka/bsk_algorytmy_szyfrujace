@@ -4,7 +4,7 @@ import pathlib
 import tkinter as tk
 import tkinter.ttk as ttk
 
-from algorytmy_impl import PM, PM2
+from algorytmy_impl import PM, PM2, PM2_decrypt, PM_decrypt, RF1, RF2
 
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "algorytmy_gui.ui"
@@ -130,16 +130,21 @@ class AlgorytmyGuiApp:
             self.message_popup('Błąd', 'Nie wprowadzono kodu!', 'warning')
             return
         rail_fence_n = self.rail_fence_n_input.get()
-        self.insert_output_code(code_input)
+        if self.__tkvar.get() == 'Encrypt':
+            self.insert_output_code(RF1(code_input, int(rail_fence_n)))
+        else:
+            self.insert_output_code(RF2(code_input, int(rail_fence_n)))
 
     def matrix_conversion1_run(self):
         code_input = self.code_input.get()
         if not code_input:
             self.message_popup('Błąd', 'Nie wprowadzono kodu!', 'warning')
             return
+
         d = int(self.matrix_conversion_a_d_input.get())
         coding_key = self.matrix_conversion_a_key_input.get()
         coding_key = [int(s) for s in coding_key.split('-')]
+
         if len(coding_key) != d:
             self.message_popup('Błąd', 'Ilość kolumn w kluczu musi się równać d!', 'error')
             return
@@ -147,7 +152,11 @@ class AlgorytmyGuiApp:
             if col > d:
                 self.message_popup('Błąd', f'Liczby w kluczu nie mogą być większe od d! ({col} > {d})', 'error')
                 return
-        self.insert_output_code(PM(code_input, d=d, key=coding_key))
+        
+        if self.__tkvar.get() == 'Encrypt':
+            self.insert_output_code(PM(code_input, d=d, key=coding_key))
+        else:
+            self.insert_output_code(PM_decrypt(code_input, d=d, key=coding_key))
 
     def matrix_conversion2_run(self):
         code_input = self.code_input.get()
@@ -156,7 +165,10 @@ class AlgorytmyGuiApp:
             return
 
         coding_key = self.matrix_conversion_a_key_input.get()
-        self.insert_output_code(PM2(code_input, coding_key))
+        if self.__tkvar.get() == 'Encrypt':
+            self.insert_output_code(PM2(code_input, coding_key))
+        else:
+            self.insert_output_code(PM2_decrypt(code_input, coding_key))
 
 
 if __name__ == '__main__':
