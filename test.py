@@ -11,11 +11,25 @@ class TestCrypt(unittest.TestCase):
         expected = "WECRLTEERDSOEEFEAOCAIVDEN"
         self.assertEqual(actual, expected)
 
+    def test_checked_when_encrypt_rail_fence_has_empty_string(self):
+        cipher = ""
+        key = 3
+        actual = RF1(cipher, key)
+        expected = "Nie wprowadzono tekstu"
+        self.assertEqual(actual, expected)
+
     def test_checked_when_decrypt_rail_fence_is_correct(self):
         cipher = "WECRLTEERDSOEEFEAOCAIVDEN"
         key = 3
         actual = RF2(cipher, key)
         expected = "WEAREDISCOVEREDFLEEATONCE"
+        self.assertEqual(actual, expected)
+
+    def test_checked_when_decrypt_rail_fence_has_empty_string(self):
+        cipher = ""
+        key = 3
+        actual = RF2(cipher, key)
+        expected = "Nie wprowadzono tekstu"
         self.assertEqual(actual, expected)
 
     def test_checked_when_encrypt_matrix_conversion1_is_correct(self):
@@ -25,11 +39,25 @@ class TestCrypt(unittest.TestCase):
         expected = "RH PO OA R TS A CP YY G "
         self.assertEqual(actual, expected)
 
+    def test_checked_when_encrypt_matrix_conversion1_has_empty_string(self):
+        cipher = ""
+        key = "3-4-1-5-2"
+        actual = PM2(cipher, key)
+        expected = "Nie wprowadzono tekstu"
+        self.assertEqual(actual, expected)
+
     def test_checked_when_decrypt_matrix_conversion1_is_correct(self):
         cipher = "RH PO OA R TS A CP YY G "
         key = "3-4-1-5-2"
         actual = PM2_decrypt(cipher, key)
         expected = "CRYPTOGRAPHYOSA"
+        self.assertEqual(actual, expected)
+
+    def test_checked_when_decrypt_matrix_conversion1_has_empty_string(self):
+        cipher = ""
+        key = "3-4-1-5-2"
+        actual = PM2_decrypt(cipher, key)
+        expected = "Nie wprowadzono tekstu"
         self.assertEqual(actual, expected)
 
     def test_checked_when_encrypt_matrix_conversion_is_correct(self):
@@ -40,10 +68,26 @@ class TestCrypt(unittest.TestCase):
         expected = "LIPTOHNEICKA"
         self.assertEqual(actual, expected)
 
+    def test_checked_when_encrypt_matrix_conversion_has_empty_string(self):
+        cipher = ""
+        d = 5
+        key = [3, 4, 1, 5, 2]
+        actual = PM(cipher, d, key)
+        expected = "Nie wprowadzono tekstu"
+        self.assertEqual(actual, expected)
+
     def test_checked_when_decrypt_matrix_conversion_is_correct(self):
         cipher = "LIPTOHNEICKA"
         d = 5
         key = [3, 4, 1, 5, 2]
         actual = PM_decrypt(cipher, d, key)
         expected = "POLITECHNIKA"
+        self.assertEqual(actual, expected)
+
+    def test_checked_when_decrypt_matrix_conversion_has_empty_string(self):
+        cipher = ""
+        d = 5
+        key = [3, 4, 1, 5, 2]
+        actual = PM_decrypt(cipher, d, key)
+        expected = "Nie wprowadzono tekstu"
         self.assertEqual(actual, expected)
