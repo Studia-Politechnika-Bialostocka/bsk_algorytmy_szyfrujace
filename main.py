@@ -86,7 +86,7 @@ class AlgorytmyGuiApp:
         self.matrix_conversion_b_key_input = tk.Entry(self.frame10)
         self.matrix_conversion_b_key_input.configure(justify='center', width='15')
         self.matrix_conversion_b_key_input.delete(0, 'end')
-        self.matrix_conversion_b_key_input.insert(0, '3-4-1-5-2')
+        self.matrix_conversion_b_key_input.insert(0, 'CONVENIENCE')
         self.matrix_conversion_b_key_input.pack(fill='y', padx='10', side='left')
         self.button8 = tk.Button(self.frame10)
         self.button8.configure(text='Run')
