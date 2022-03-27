@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import random
 
 
 def PM(text, d = 5, key = [3, 4, 1, 5, 2]):
@@ -150,3 +151,29 @@ def RF2(cipher, key):
         else:
             row -= 1
     return "".join(result)
+
+def random_generator_num(input_key, state = None, key_length = 128):
+    key = [int(s) for s in input_key.split('-') if int(s) != 1]
+
+    if not state:
+        state = random.getrandbits(max(key))
+    
+
+    generated_code = ""
+    for _ in range(key_length):
+        generated_code += str(state & 1)
+        for i in key:
+            newbit = state ^ (state >> i - 1)
+        newbit = newbit & 1
+        state = (state >> 1) | (newbit << 3)
+
+    return generated_code;
+
+def synchronous_stream_cipher(text, input_key, state, key_length = 128):
+    cipher_key = random_generator_num(input_key, state, key_length);
+    # bit_text = ''.join(format(ord(x), '08b') for x in text)
+    result = ''.join(chr(ord(a) ^ ord(b)) for a,b in zip(text,cipher_key))
+    print(result)
+
+
+synchronous_stream_cipher("halo", "4-1", 6)

@@ -236,6 +236,8 @@ class AlgorytmyGuiApp:
         input_state = self.stream_cipher_state.get()
         self.insert_output_code(input_state + input_key)
 
+        
+
 if __name__ == '__main__':
     app = AlgorytmyGuiApp()
     app.run()
