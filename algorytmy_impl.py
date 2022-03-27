@@ -157,7 +157,8 @@ def random_generator_num(input_key, state = None, key_length = 128):
 
     if not state:
         state = random.getrandbits(max(key))
-    
+    while state == 0:
+        state = random.getrandbits(max(key))
 
     generated_code = ""
     for _ in range(key_length):
@@ -171,9 +172,10 @@ def random_generator_num(input_key, state = None, key_length = 128):
 
 def synchronous_stream_cipher(text, input_key, state, key_length = 128):
     cipher_key = random_generator_num(input_key, state, key_length);
-    # bit_text = ''.join(format(ord(x), '08b') for x in text)
+    while (len(cipher_key) < len(text) * 8):
+        cipher_key += cipher_key
+
     result = ''.join(chr(ord(a) ^ ord(b)) for a,b in zip(text,cipher_key))
-    print(result)
+    return result
 
 
-synchronous_stream_cipher("halo", "4-1", 6)

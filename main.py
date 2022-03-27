@@ -4,7 +4,7 @@ import pathlib
 import tkinter as tk
 import tkinter.ttk as ttk
 
-from algorytmy_impl import PM, PM2, PM2_decrypt, PM_decrypt, RF1, RF2
+from algorytmy_impl import PM, PM2, PM2_decrypt, PM_decrypt, RF1, RF2, random_generator_num, synchronous_stream_cipher
 
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "algorytmy_gui.ui"
@@ -217,24 +217,14 @@ class AlgorytmyGuiApp:
 
     def random_generator_run(self):
         input_key = self.entry1.get()
-        key = [int(s) for s in input_key.split('-') if int(s) != 1]
-        generated_code = ""
-        state = 6
-        for _ in range(128):
-            generated_code += str(state & 1)
-            print(state & 1, end='')
-            for i in key:
-                newbit = state ^ (state >> i - 1)
-            newbit = newbit & 1
-            state = (state >> 1) | (newbit << 3)
-
-        self.insert_output_code(generated_code*100)
+        self.insert_output_code(random_generator_num(input_key))
 
     def synchronous_stream_cipher_run(self):
         input_code = self.code_input.get()
         input_key = self.stream_cipher_key.get()
         input_state = self.stream_cipher_state.get()
-        self.insert_output_code(input_state + input_key)
+        result = synchronous_stream_cipher(input_code, input_key, int(input_state))
+        self.insert_output_code(result)
 
         
 
