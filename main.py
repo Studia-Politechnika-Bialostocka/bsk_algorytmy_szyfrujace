@@ -94,6 +94,51 @@ class AlgorytmyGuiApp:
         self.button8.configure(command=self.matrix_conversion2_run)
         self.frame10.configure(height='200', width='200')
         self.frame10.pack(anchor='w', padx='20', pady='10', side='top')
+        self.frame1 = tk.Frame(self.main_window)
+        self.label4 = tk.Label(self.frame1)
+        self.label4.configure(font='{Bahnschrift SemiLight SemiConde} 16 {}', text='Pseudo-random number generator')
+        self.label4.pack(side='left')
+        self.label5 = tk.Label(self.frame1)
+        self.label5.configure(text='𝜑(𝑥)')
+        self.label5.pack(side='left')
+        self.entry1 = tk.Entry(self.frame1)
+        self.entry1.configure(justify='center', width='15')
+        self.entry1.delete(0, 'end')
+        self.entry1.insert(0, '4-1')
+        self.entry1.pack(fill='y', padx='10', side='left')
+        self.button1 = tk.Button(self.frame1)
+        self.button1.configure(text='Run')
+        self.button1.pack(fill='y', ipadx='10', side='left')
+        self.button1.configure(command=self.random_generator_run)
+        self.frame1.configure(height='200', width='200')
+        self.frame1.pack(anchor='w', padx='20', pady='10', side='top')
+        self.stream_cipher_frame = tk.Frame(self.main_window)
+        self.label6 = tk.Label(self.stream_cipher_frame)
+        self.label6.configure(font='{Bahnschrift SemiLight SemiConde} 16 {}', text='Stream cipher')
+        self.label6.pack(side='left')
+        self.label7 = tk.Label(self.stream_cipher_frame)
+        self.label7.configure(text='𝜑(𝑥)')
+        self.label7.pack(side='left')
+        self.stream_cipher_key = tk.Entry(self.stream_cipher_frame)
+        self.stream_cipher_key.configure(justify='center', width='15')
+        self.stream_cipher_key.delete(0, 'end')
+        self.stream_cipher_key.insert(0, '4-1')
+        self.stream_cipher_key.pack(fill='y', padx='10', side='left')
+        self.label8 = tk.Label(self.stream_cipher_frame)
+        self.label8.configure(text='state')
+        self.label8.pack(side='left')
+        self.stream_cipher_state = tk.Entry(self.stream_cipher_frame)
+        self.stream_cipher_state.configure(justify='center', width='15')
+        self.stream_cipher_state.delete(0, 'end')
+        self.stream_cipher_state.insert(0, '6')
+        self.stream_cipher_state.pack(fill='y', padx='10', side='left')
+        self.button2 = tk.Button(self.stream_cipher_frame)
+        self.button2.configure(text='Run')
+        self.button2.pack(fill='y', ipadx='10', side='left')
+        self.button2.configure(command=self.synchronous_stream_cipher_run)
+        self.stream_cipher_frame.configure(height='200', width='200')
+        self.stream_cipher_frame.pack(anchor='w', padx='20', pady='10', side='top')
+
         self.frame11 = tk.Frame(self.main_window)
         self.label27 = tk.Label(self.frame11)
         self.label27.configure(font='{Bahnschrift SemiLight SemiConde} 16 {}', text='Output   ')
@@ -104,7 +149,7 @@ class AlgorytmyGuiApp:
         self.frame11.configure(height='200', width='200')
         self.frame11.pack(anchor='w', padx='20', pady='50', side='top')
         self.main_window.configure(height='200', width='200')
-        self.main_window.geometry('640x400')
+        self.main_window.geometry('640x500')
 
         # Main widget
         self.mainwindow = self.main_window
@@ -170,6 +215,26 @@ class AlgorytmyGuiApp:
         else:
             self.insert_output_code(PM2_decrypt(code_input, coding_key))
 
+    def random_generator_run(self):
+        input_key = self.entry1.get()
+        key = [int(s) for s in input_key.split('-') if int(s) != 1]
+        generated_code = ""
+        state = 6
+        for _ in range(128):
+            generated_code += str(state & 1)
+            print(state & 1, end='')
+            for i in key:
+                newbit = state ^ (state >> i - 1)
+            newbit = newbit & 1
+            state = (state >> 1) | (newbit << 3)
+
+        self.insert_output_code(generated_code*100)
+
+    def synchronous_stream_cipher_run(self):
+        input_code = self.code_input.get()
+        input_key = self.stream_cipher_key.get()
+        input_state = self.stream_cipher_state.get()
+        self.insert_output_code(input_state + input_key)
 
 if __name__ == '__main__':
     app = AlgorytmyGuiApp()
