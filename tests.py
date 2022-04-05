@@ -1,37 +1,40 @@
 import unittest
 
 from algorytmy_impl import synchronous_stream_cipher
+from rsa_implementation import generate_rsa_keys, keysgen, numencrypt
 
 
 class TestCrypt(unittest.TestCase):
-    def test_checked_when_synchronous_stream_cipher_is_correct(self):
-        text = "Bezpieczeństwo sieci komputerowych"
-        state = 6
-        input_key = "4-1"
-        actual = synchronous_stream_cipher(text, input_key, state, 128)
-        expected = "rTK@YTSJUŵBEF_CXTSY[_]ADETB^GHRX"
+    def test_RSA(self):
+        p = 7
+        q = 11
+        actual = generate_rsa_keys(p, q)
+        expected = (77, 65537, 53)
         self.assertEqual(actual, expected)
 
-    def test2_checked_when_synchronous_stream_cipher_is_correct(self):
-        text = "Bezpieczeństwo sieci komputerowych"
-        state = 8
-        input_key = "5-1"
-        actual = synchronous_stream_cipher(text, input_key, state, 128)
-        expected = "rUJAYUSKUŴCEG_BYUSX[_\@EDTB_GHSX"
+        pass
+
+
+    def test_keysgen(self):
+        p = 7
+        q = 11
+        actual = keysgen(p, q)
+        expected = {'priv': (53, 77), 'pub': (35537, 77)}
         self.assertEqual(actual, expected)
 
-    def test3_checked_when_decrypt_synchronous_stream_cipher_is_correct(self):
-        text = "rTK@XTSKTŴBEG^CXTSX[^\@DEUC^GHRX"
-        state = 6
-        input_key = "5-3-1"
-        actual = synchronous_stream_cipher(text, input_key, state, 128)
-        expected = "Bezpieczeństwo sieci komputerowych"
+    def test_numencrypt_encrypt(self):
+        priv = (720926705, 982634309)
+        pub = (35537, 982634309)
+        message = 80087
+        actual = numencrypt(message, priv)
+        expected = 539186383
         self.assertEqual(actual, expected)
 
-    def test4_checked_when_decrypt_synchronous_stream_cipher_is_correct(self):
-        text = "rTK@XTSKTŴBEG^CXTSX[^\@DEUC^GHRX"
-        state = 6
-        input_key = "5-3-1"
-        actual = synchronous_stream_cipher(text, input_key, state, 128)
-        expected = "Bezpieczeństwo sieci komputerowych"
-        self.assertEqual(actual, expected)
+    # def test_numencrypt_decrypt(self):
+    #     priv = (720926705, 982634309)
+    #     pub = (35537, 982634309)
+    #     message = 895887933
+    #     actual = numencrypt(message, pub)
+    #     expected = 1323123123
+    #     self.assertEqual(actual, expected)
+
