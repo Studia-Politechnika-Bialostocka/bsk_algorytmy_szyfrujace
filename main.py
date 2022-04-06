@@ -10,6 +10,15 @@ PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "rsa_algorytm_gui.ui"
 
 
+def message_popup(title, text, type_message='info'):
+    if type_message == 'info':
+        tk.messagebox.showinfo(title, text)
+    elif type_message == 'warning':
+        tk.messagebox.showwarning(title, text)
+    elif type_message == 'error':
+        tk.messagebox.showerror(title, text)
+
+
 class RsaAlgorytmGuiApp:
     def __init__(self, master=None):
         self.builder = builder = pygubu.Builder()
@@ -28,7 +37,7 @@ class RsaAlgorytmGuiApp:
         q = int(self.builder.get_variable('q_var').get())
         generate_public_private_key(p, q)
         self.insert_output_text('Generated keys')
-        self.message_popup('Generated keys', 'Generated keys')
+        message_popup('Generated keys', 'Generated keys')
 
     def encrypt_message_call(self):
         pass
@@ -51,15 +60,6 @@ class RsaAlgorytmGuiApp:
     def insert_output_text(self, text):
         print(text)
         self.builder.get_variable('output_var').set(text)
-
-    def message_popup(self, title, text, type_message='info'):
-        if type_message == 'info':
-            tk.messagebox.showinfo(title, text)
-        elif type_message == 'warning':
-            tk.messagebox.showwarning(title, text)
-        elif type_message == 'error':
-            tk.messagebox.showerror(title, text)
-
 
 
 if __name__ == '__main__':
