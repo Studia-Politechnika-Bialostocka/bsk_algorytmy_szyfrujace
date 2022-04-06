@@ -1,17 +1,18 @@
 # 🔐 Bezpieczeństwo Sieci Komputerowych
 
-Ćwiczenie numer:  3
-### Temat: Implementacja podstawowych modułów kryptograficznych
+Ćwiczenie numer:  5
+### Temat: KRYPTOSYSTEMY SYMETRYCZNE - ALGORYTMY: DES, RSA
 
 Wykonujący ćwiczenie: 
 - Mateusz Białowąs
 - Łukasz Białczak
 - Sylwia Mościcka
 
-Treść zadania:
-1. Zaimplementuj algorytm kodujący i dekodujący z wykorzystaniem szyfru prostego przestawiania rail fence dla k = n. Skorzystaj z przykładu 1 (1 punkt).
+Wykonaj program realizujący szyfrowanie i deszyfrowanie z wykorzystaniem algorytmu RSA.
 
-2. Zaimplementuj system kryptograficzny oparty o przestawienie macierzowe pokazane w przykładzie 2a dla d = 5 oraz klucza key = 3-4-1-5-2 (1 punkt).
-
-3. Zaimplementuj system kryptograficzny oparty o przestawienie macierzowe 2b (1 punkt)
+1. Generowanie pary kluczy prywatnych i publicznych - 2 pkt
+2. Obliczanie odwrotności modulo n - 2 pkt
+3. Poprawne zaszyfrowanie wiadomości - 2 pkt
+4. Poprawne deszyfrowanie wiadomości - 2 pkt
+5. Obsługa plików binarnych - 1 pkt
 
