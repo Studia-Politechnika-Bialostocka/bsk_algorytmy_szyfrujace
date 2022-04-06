@@ -47,7 +47,8 @@
         <child>
           <object class="tk.Entry" id="public_key_input">
             <property name="justify">center</property>
-            <property name="width">8</property>
+            <property name="textvariable">int:p_var</property>
+            <property name="width">12</property>
             <layout manager="pack">
               <property name="fill">y</property>
               <property name="padx">10</property>
@@ -67,7 +68,8 @@
         <child>
           <object class="tk.Entry" id="entry5">
             <property name="justify">center</property>
-            <property name="width">8</property>
+            <property name="textvariable">int:q_var</property>
+            <property name="width">12</property>
             <layout manager="pack">
               <property name="fill">y</property>
               <property name="padx">10</property>
@@ -77,7 +79,7 @@
         </child>
         <child>
           <object class="tk.Button" id="button4">
-            <property name="command" type="command" cbtype="simple">generate_public_private_key</property>
+            <property name="command" type="command" cbtype="simple">generate_public_private_key_call</property>
             <property name="text" translatable="yes">Calculate</property>
             <layout manager="pack">
               <property name="fill">y</property>
@@ -110,6 +112,7 @@
         <child>
           <object class="tk.Entry" id="generated_private_key">
             <property name="justify">center</property>
+            <property name="textvariable">string:private_key_var</property>
             <property name="width">15</property>
             <layout manager="pack">
               <property name="fill">y</property>
@@ -130,6 +133,7 @@
         <child>
           <object class="tk.Entry" id="generated_public_key">
             <property name="justify">center</property>
+            <property name="textvariable">string:public_key_var</property>
             <property name="width">15</property>
             <layout manager="pack">
               <property name="fill">y</property>
@@ -172,7 +176,7 @@
         </child>
         <child>
           <object class="tk.Button" id="encrypt_button">
-            <property name="command" type="command" cbtype="simple">encrypt_message</property>
+            <property name="command" type="command" cbtype="simple">encrypt_message_call</property>
             <property name="text" translatable="yes">Encrypt</property>
             <layout manager="pack">
               <property name="fill">y</property>
@@ -183,7 +187,7 @@
         </child>
         <child>
           <object class="tk.Button" id="decrypt_button">
-            <property name="command" type="command" cbtype="simple">decrypt_message</property>
+            <property name="command" type="command" cbtype="simple">decrypt_message_call</property>
             <property name="text" translatable="yes">Decrypt</property>
             <layout manager="pack">
               <property name="fill">y</property>
@@ -216,7 +220,7 @@
         </child>
         <child>
           <object class="tk.Button" id="button9">
-            <property name="command" type="command" cbtype="simple">select_file</property>
+            <property name="command" type="command" cbtype="simple">select_file_call</property>
             <property name="text" translatable="yes">Select file</property>
             <layout manager="pack">
               <property name="fill">y</property>
@@ -228,7 +232,7 @@
         </child>
         <child>
           <object class="tk.Button" id="button7">
-            <property name="command" type="command" cbtype="simple">encrypt_file</property>
+            <property name="command" type="command" cbtype="simple">encrypt_file_call</property>
             <property name="text" translatable="yes">Encrypt</property>
             <layout manager="pack">
               <property name="fill">y</property>
@@ -240,7 +244,7 @@
         </child>
         <child>
           <object class="tk.Button" id="button8">
-            <property name="command" type="command" cbtype="simple">decrypt_file</property>
+            <property name="command" type="command" cbtype="simple">decrypt_file_call</property>
             <property name="text" translatable="yes">Decrypt</property>
             <layout manager="pack">
               <property name="fill">y</property>
@@ -272,6 +276,7 @@
         </child>
         <child>
           <object class="ttk.Entry" id="code_output">
+            <property name="textvariable">string:output_var</property>
             <property name="width">80</property>
             <layout manager="pack">
               <property name="anchor">center</property>
