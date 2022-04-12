@@ -33,20 +33,25 @@ def power_mod(base, exp, mod):
     return res
 
 
-def encrypt_file(file_name):
+def encrypt_file(public_key, file_name):
+    key = tuple([int(el) for el in public_key.replace('(', '').replace(')', '').split(',')])
     f = open(file_name, 'r')
     file_content = f.read()
     f.close()
-    print(file_content)
-    create_file(file_content, 'encrypted_' + file_name)
+    result = encrypt_rsa(file_content, key)
+    result = ' '.join([str(el) for el in result])
+    create_file(result, 'encrypted_message.txt')
+    return result
 
 
-def decrypt_file(file_name):
+def decrypt_file(private_key, file_name):
+    key = tuple([int(el) for el in private_key.replace('(', '').replace(')', '').split(',')])
     f = open(file_name, 'r')
     file_content = f.read()
+    file_content = [int(el) for el in file_content.split(" ")]
     f.close()
-    print(file_content)
-    create_file(file_content, 'decrypted_' + file_name)
+    create_file(decrypt_rsa(file_content, key), 'decrypted_message.txt')
+    return True
 
 
 def create_file(content, file_name):
