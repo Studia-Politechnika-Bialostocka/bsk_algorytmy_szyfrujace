@@ -6,10 +6,16 @@ def encrypt_file(file_name):
     file_content = f.read()
     f.close()
     print(file_content)
-    create_encrypted_file(file_content)
+    create_file(file_content, 'encrypted_' + file_name)
 
+def decrypt_file(file_name):
+    f = open(file_name, 'r')
+    file_content = f.read()
+    f.close()
+    print(file_content)
+    create_file(file_content, 'decrypted_' + file_name)
 
-def create_encrypted_file(content):
-    f = open('encrypted_message.txt', 'w')
+def create_file(content, file_name):
+    f = open(file_name, 'w')
     f.write(content)
     f.close()
