@@ -21,6 +21,7 @@ def message_popup(title, text, type_message='info'):
 
 class RsaAlgorytmGuiApp:
     def __init__(self, master=None):
+        self.filename = None
         self.builder = builder = pygubu.Builder()
         builder.add_resource_path(PROJECT_PATH)
         builder.add_from_file(PROJECT_UI)
@@ -57,17 +58,26 @@ class RsaAlgorytmGuiApp:
 
     def select_file_call(self):
         filename = filedialog.askopenfilename(title='Select an image')
-        self.insert_output_text(filename)
+        if filename:
+            self.filename = filename
+            self.insert_output_text(filename)
 
         pass
 
     def encrypt_file_call(self):
-        pass
+        if self.filename is None:
+            message_popup('No file selected', 'No file selected')
+            return
+        else:
+            encrypt_file(self.filename)
+            message_popup('Encrypted file', 'Encrypted file')
 
     def decrypt_file_call(self):
         pass
 
     def insert_output_text(self, text):
+        if not text:
+            message_popup('No text', 'No text')
         print(text)
         self.builder.get_variable('output_var').set(text)
 
