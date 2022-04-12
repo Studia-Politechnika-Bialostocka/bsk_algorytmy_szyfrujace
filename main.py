@@ -4,7 +4,7 @@ import tkinter.ttk as ttk
 from tkinter import filedialog
 import pygubu
 
-from rsa_implementation import generate_public_private_key
+from rsa_implementation import generate_public_private_key, encrypt_rsa, decrypt_rsa
 
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "rsa_algorytm_gui.ui"
@@ -40,10 +40,20 @@ class RsaAlgorytmGuiApp:
         message_popup('Generated keys', 'Generated keys')
 
     def encrypt_message_call(self):
-        pass
+        public_key = self.builder.get_variable('public_key_var').get()
+        key = tuple([int(el) for el in public_key.replace('(', '').replace(')', '').split(',')])
+        message = self.builder.get_variable('message_var').get()
+        result = encrypt_rsa(message, key)
+        self.insert_output_text(result)
+
+
 
     def decrypt_message_call(self):
-        pass
+        private_key = self.builder.get_variable('private_key_var').get()
+        key = tuple([int(el) for el in private_key.replace('(', '').replace(')', '').split(',')])
+        message = [int(el) for el in self.builder.get_variable('message_var').get().split(' ')]
+        result = decrypt_rsa(message, key)
+        self.insert_output_text(result)
 
     def select_file_call(self):
         filename = filedialog.askopenfilename(title='Select an image')
