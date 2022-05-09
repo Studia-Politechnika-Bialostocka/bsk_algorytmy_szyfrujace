@@ -1,4 +1,6 @@
-from random import random
+import random
+
+import rsa
 
 
 def generate_public_private_key(p, q):
@@ -12,59 +14,30 @@ def gcd(a, b):
         return gcd(b, a % b)
 
 
-def extended_gcd(a, b):
-    x, old_x = 0, 1
-    y, old_y = 1, 0
+def getKeys(p, q):
+    n = p * q
+    phi = (p - 1) * (q - 1)
+    for i in range(2, phi):
+        if gcd(phi, i) == 1:
+            e = i
+            break
 
-    while b != 0:
-        quotient = a // b
-        a, b = b, a - quotient * b
-        old_x, x = x, old_x - quotient * x
-        old_y, y = y, old_y - quotient * y
+    d = multiplicativeInverse(e, phi)
 
-    return a, old_x, old_y
-
-
-def choose_random_number(totient):
-    while True:
-        e = random.randrange(2, totient)
-
-        if gcd(e, totient) == 1:
-            return e
+    return (e,n), (d,n)
 
 
-def generate_key():
-    rand1 = random.randint(100, 300)
-    rand2 = random.randint(100, 300)
+def multiplicativeInverse(e, phi):
+    return extendedEuclid(e, phi)[1] % phi
 
-    file = open("prime.txt", "r")
-    lines = file.read().splitlines()
-    file.close()
 
-    prime1 = int(lines[rand1])
-    prime2 = int(lines[rand2])
-
-    n = prime1 * prime2
-    totient = (prime1 - 1) * (prime2 - 1)
-    e = choose_random_number(totient)
-
-    gcd, x, y = extended_gcd(e, totient)
-
-    if x < 0:
-        d = x + totient
+def extendedEuclid(a, b):
+    if b == 0:
+        return a, 1, 0
     else:
-        d = x
-
-    f_public = open("public_key.txt", "w")
-    f_public.write(str(n) + "\n")
-    f_public.write(str(e) + "\n")
-    f_public.close()
-
-    f_private = open("private_key.txt", "w")
-    f_private.write(str(n) + "\n")
-    f_private.write(str(d) + "\n")
-    f_private.close()
-
+        d2, x2, y2 = extendedEuclid(b, a % b)
+        d, x, y = d2, y2, x2 - (a // b) * y2
+        return d, x, y
 
 def encrypt_rsa(text, key):
     text2 = bytearray()

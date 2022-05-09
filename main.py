@@ -5,7 +5,7 @@ from tkinter import filedialog
 import pygubu
 
 from rsa_implementation import generate_public_private_key, encrypt_rsa, decrypt_rsa, create_file, decrypt_file, \
-    encrypt_file
+    encrypt_file, getKeys
 
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "rsa_algorytm_gui.ui"
@@ -33,8 +33,6 @@ class RsaAlgorytmGuiApp:
         builder.connect_callbacks(self)
         self.builder.get_variable('p_var').set(11)
         self.builder.get_variable('q_var').set(13)
-        # self.builder.get_variable('public_key_var').set('(7, 143)')
-        # self.builder.get_variable('private_key_var').set('(223, 143)')
 
     def run(self):
         self.mainwindow.mainloop()
@@ -42,7 +40,9 @@ class RsaAlgorytmGuiApp:
     def generate_public_private_key_call(self):
         p = int(self.builder.get_variable('p_var').get())
         q = int(self.builder.get_variable('q_var').get())
-        generate_public_private_key(p, q)
+        pub_key, private_key = getKeys(p, q)
+        self.builder.get_variable('public_key_var').set(pub_key)
+        self.builder.get_variable('private_key_var').set(private_key)
         self.insert_output_text('Generated keys')
         message_popup('Generated keys', 'Generated keys')
 
